@@ -1,5 +1,7 @@
 package inventario.utilities;
 
+import inventario.logic.Products;
+import inventario.model.Product;
 import java.util.ArrayList;
 
 /**
@@ -13,15 +15,15 @@ public class CodeRandom {
     public CodeRandom() {
     }
 
-    public String getCode(String head) {   
-        String code = String.valueOf(getRandom()+""+getRandom()+""+getRandom()
-                +""+getRandom()+""+getRandom()+""+getRandom()+""+getRandom());
+    public boolean getCode(String code) {
+        if(Products.getProducts().isEmpty()) return true;
         
-        if (this.codes.indexOf(head+code)!=-1) {
-            System.out.println("encontrado");
-             code = getCode(head);
-        }
-        return  head+code;
+        codes.clear();
+        Products.getProducts().forEach((product) -> {
+            codes.add(product.getCode());
+       });
+        
+        return this.codes.indexOf(code)==-1;
     }
     
     private int getRandom(){

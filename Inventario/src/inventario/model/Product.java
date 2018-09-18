@@ -6,28 +6,26 @@
 package inventario.model;
 
 import inventario.utilities.CodeRandom;
-import javafx.beans.property.SimpleStringProperty;
+import java.io.Serializable;
 
 /**
  *
  * @author Frank Bustamante
  */
-public class Product {
+public class Product implements Serializable{
     private String name;
     private String category;
-    private  String code;
+    private String code;
     private String location;
-    private int quantity;
-    private double price;
+    private String quantity;
+    private String price;
     private String  type;
 
     
-    public Product(String name, double price, String type) {
-        this.code = name;
-        
+    public Product(int code, String name, double price) {
+        this.code = String.valueOf(code);
         this.name = name;
-        this.price = price;
-        this.type = (type);
+        this.price = String.valueOf(price);
         
     }
 
@@ -37,13 +35,13 @@ public class Product {
     
     
     
-    public Product(String name, String category, String location, int quantity, double price, String  type) {
+    public Product(String code, String name, String category, String location, int quantity, double price, String  type) {
         this.name = name;
         this.category = category;
-        this.code = new CodeRandom().getCode("01");
+        this.code = code;
         this.location = location;
-        this.quantity = quantity;
-        this.price = price;
+        this.quantity = String.valueOf( quantity);
+        this.price = String.valueOf(price);
         this.type = (type);
     }
 
@@ -71,7 +69,7 @@ public class Product {
     }
     
     public void setCode(String code){
-        
+        this.code = code;
     }
     
     public String getLocation() {
@@ -82,20 +80,20 @@ public class Product {
         this.location = location;
     }
 
-    public int getQuantity() {
-        return this.quantity;
+    public String getQuantity() {
+        return (this.quantity);
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setQuantity(double quantity) {
+        this.quantity = String.valueOf(quantity);
     }
 
-    public double getPrice() {
-        return this.price;
+    public String getPrice() {
+        return (this.price);
     }
 
     public void setPrice(double price) {
-        this.price = price;
+        this.price = String.valueOf(price);
     }
 
     public String  getType() {

@@ -20,7 +20,7 @@ abstract class User {
     private int doc;
 
     public User() {
-        this.id = new CodeRandom().getCode("03");
+        this.id = "";
     }
     
     

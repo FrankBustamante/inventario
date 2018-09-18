@@ -18,7 +18,7 @@ public class TypeEmployeed {
     private ArrayList<String> permission = new ArrayList<>();
 
     public TypeEmployeed(String name, String permission) {
-        this.id = new CodeRandom().getCode("05");
+        this.id ="";
         this.name = name;
         this.permission.add(permission);
     }

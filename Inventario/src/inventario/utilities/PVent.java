@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package inventario.utilities;
+
 import inventario.logic.Products;
 import inventario.model.Product;
 
@@ -11,54 +12,20 @@ import inventario.model.Product;
  *
  * @author Frank Bustamante
  */
-public class PVent extends Product{
-    
-    private String amount;
-    private String cod;
-    static Product p;
+public class PVent extends Product {
 
-    public PVent(String code, String am) {
-        super(code, am);
-        this.cod= code;
-        this.amount=(am);
-        c();
-    }
-    
-    private void c(){
-        p = Products.getProduct(cod);  
-        
-        this.setName(p.getName());
-        this.setType(p.getType());
-        
-        
-        this.setPrice(p.getPrice());
-    }
-    
-    
-        
-    public String getAmount() {
-        return amount;
+    private String am;
+
+    public PVent(int Code, String name, double price, int am) {
+        super(Code, name, price);
+        this.am = String.valueOf(am);
     }
 
-    public void setAmount(String amount) {
-        this.amount = amount;
+    public String getAm() {
+        return am;
     }
 
-    @Override
-    public String getCode() {
-        return cod;
+    public void setAm(int am) {
+        this.am = String.valueOf(am);
     }
-
-    @Override
-    public void setCode(String code) {
-        this.cod = code;
-    }
-    
-    
-    
-    
-    
-    
-   
-    
 }

@@ -16,7 +16,7 @@ public class Category {
     private String name;
 
     public Category( String name) {
-        this.code = new CodeRandom().getCode("04");
+        this.code ="";
         this.name = name;
     }
 

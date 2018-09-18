@@ -7,6 +7,7 @@ package inventario.view;
 
 import inventario.Inventario;
 import inventario.logic.Auth;
+import inventario.logic.Products;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -59,10 +60,11 @@ public class Login extends Pane {
     
     private void getEvents(){
         btIngresar.setOnMouseClicked((MouseEvent e) -> {
-            new Inventario().getScene().setRoot(new ViewAdmin());
+            //new Inventario().getScene().setRoot(new ViewAdmin());
+            new Inventario().getScene().setRoot(new ViewMain());
            if(auth.logIn(txtUser.getText(),txtPassword.getText())){
               //new Inventario().getScene().setRoot(new ViewMain());
-              new Inventario().getScene().setRoot(new ViewAdmin());
+              //new Inventario().getScene().setRoot(new ViewAdmin());
            }
         });
     }
