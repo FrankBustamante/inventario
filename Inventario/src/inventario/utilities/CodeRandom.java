@@ -23,7 +23,7 @@ public class CodeRandom {
             codes.add(product.getCode());
        });
         
-        return this.codes.indexOf(code)==-1;
+        return this.codes.indexOf(code)== -1;
     }
     
     private int getRandom(){

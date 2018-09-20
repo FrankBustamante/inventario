@@ -7,12 +7,13 @@ package inventario.utilities;
 
 import inventario.logic.Products;
 import inventario.model.Product;
+import java.io.Serializable;
 
 /**
  *
  * @author Frank Bustamante
  */
-public class PVent extends Product {
+public class PVent extends Product implements Serializable{
 
     private String am;
 

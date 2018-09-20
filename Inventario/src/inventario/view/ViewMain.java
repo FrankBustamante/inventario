@@ -1,10 +1,16 @@
 package inventario.view;
 
 import inventario.logic.Products;
+import inventario.logic.Vendings;
 import inventario.model.Category;
 import inventario.model.Product;
+import inventario.model.Vending;
 import inventario.utilities.PVent;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.function.Consumer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -41,13 +47,12 @@ import javax.swing.JOptionPane;
  */
 public class ViewMain extends VBox {
 
-    //iNSTANCIAS
-    private double total = 0;
+    //INSTANCIAS
     private HBox panelOpciones;
     private GridPane panelHome;
     private final TableView<PVent> table = new TableView<>();
     private final ObservableList<PVent> data = FXCollections.observableArrayList();
-    private Button btHome, btReporte, btSearch, btCategory, btSave, btNew;
+    private Button btHome, btReporte, btSearch, btSave, btNew;
     private TextField txtCode, txtAmount, txtTotal;
     private Label lCodige, lName, lType, lQuantity, lAmount;
     private TableColumn colCode, colName, colType, colAmount, colActions, colPrice;
@@ -56,7 +61,7 @@ public class ViewMain extends VBox {
         launch();
     }
 
-    private void launch() {
+    private void launch()  {
         init();
         config();
         events();
@@ -66,11 +71,12 @@ public class ViewMain extends VBox {
         table.getColumns().addAll(colCode, colName, colType, colPrice, colAmount, colActions);
 
         this.panelOpciones.getChildren().addAll(btHome,
-                btSearch, btReporte, btCategory);
+                btSearch, btReporte);
 
         this.panelHome.addColumn(1,txtTotal, txtCode, txtAmount);
         this.panelHome.addRow(2, btNew);
         this.panelHome.addColumn(5, table);
+        this.panelHome.addRow(3, btSave);
 
         this.getChildren().addAll(panelOpciones, panelHome);
     }
@@ -84,7 +90,6 @@ public class ViewMain extends VBox {
         btHome = new Button("Home");
         btReporte = new Button("Reportes");
         btSearch = new Button("Buscar");
-        btCategory = new Button("Categorias");
         btSave = new Button("Guardar");
         btNew = new Button("Agregar");
 
@@ -162,23 +167,30 @@ public class ViewMain extends VBox {
             Product p = Products.getProduct(txtCode.getText());
 
             if (p != null) {
-                double pr = Double.parseDouble(p.getPrice()); 
-                int am = Integer.parseInt(txtAmount.getText());
-                this.total += pr * (double) am;
                 
                 data.add(new PVent(Integer.parseInt(txtCode.getText()), p.getName(),
-                        pr, am));
+                        Double.parseDouble(p.getPrice()), Integer.parseInt(txtAmount.getText())));
+                
+                this.txtTotal.setText(total());
                 this.txtAmount.setText("");
                 this.txtCode.setText("");
                 this.txtCode.requestFocus();
                 
-                this.txtTotal.setText(String.valueOf(total));
+                
             }else{
-                JOptionPane.showMessageDialog(null, "Producto no encontrado");
+               // JOptionPane.showMessageDialog(null, "Producto no encontrado");
             }
-
         });
-
+        
+        btSave.setOnAction((e) ->{
+            Vendings.saveVending(new Vending( data, total()));
+        });
+        
+        btHome.setOnAction((e) ->{
+            Calendar calendar = Calendar.getInstance();
+            String date = calendar.get(Calendar.DATE)+"-"+(calendar.get(Calendar.MONTH)+1)+"-"+calendar.get(Calendar.YEAR);
+        new Vendings().getVendings(date);
+        });
         //COLUMNS
         colAmount.setOnEditCommit(
                 new EventHandler<CellEditEvent<PVent, String>>() {
@@ -186,8 +198,7 @@ public class ViewMain extends VBox {
             public void handle(CellEditEvent<PVent, String> t) {
                 ((PVent) t.getTableView().getItems().get(
                         t.getTablePosition().getRow())).setAm(Integer.parseInt(t.getNewValue()));
-                System.out.println("nuevo Valor: " + t.getNewValue());
-
+                txtTotal.setText(total());
             }
         }
         );
@@ -202,6 +213,16 @@ public class ViewMain extends VBox {
             }
         }
         );
+    }
+    
+    private String total(){
+        double total = 0;
+        total = data.stream().map((p) -> Double.parseDouble(p.getAm()) *
+                Double.parseDouble(p.getPrice())).reduce(total, (accumulator, _item) -> accumulator + _item);
+        
+        
+        
+        return String.valueOf(total);
     }
 
 }

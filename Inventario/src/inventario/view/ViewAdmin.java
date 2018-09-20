@@ -1,8 +1,10 @@
 package inventario.view;
 
 import inventario.logic.Products;
+import inventario.logic.Reportes;
 import inventario.model.Product;
 import inventario.utilities.CodeRandom;
+import java.util.Calendar;
 import static javafx.application.Application.launch;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -24,7 +26,7 @@ import javafx.stage.Stage;
  */
 public class ViewAdmin extends VBox{
 
-    private Button btNewProduct, btAddProduct, btViewProducts;
+    private Button btNewProduct, btAddProduct, btViewProducts, btReporte;
     private TextField txtName, txtType, txtLocation, txtPrice, txtQuantity, txtCategory, txtCode;
     private Pane paneNew, paneProducts;
     private final TableView<Product> TABLE = new TableView<>();
@@ -53,7 +55,7 @@ public class ViewAdmin extends VBox{
         ));
         
         this.paneProducts.getChildren().addAll(TABLE);
-        this.getChildren().addAll(new HBox(btNewProduct, btViewProducts),
+        this.getChildren().addAll(new HBox(btNewProduct, btViewProducts, btReporte),
                         paneNew,paneProducts
                 
         );
@@ -64,6 +66,7 @@ public class ViewAdmin extends VBox{
         btAddProduct = new Button("Guardar");
         btNewProduct = new Button("Nuevo");
         btViewProducts = new Button("Productos");
+        btReporte = new Button("Reportes");
         
         //TEXTFIELD
         txtName = new TextField();
@@ -124,6 +127,12 @@ public class ViewAdmin extends VBox{
     private void events(){
         CodeRandom c = new CodeRandom();
         //BUTTON
+        btReporte.setOnAction((e) ->{
+            Calendar calendar = Calendar.getInstance();
+            String date = calendar.get(Calendar.DATE)+"-"+(calendar.get(Calendar.MONTH)+1)+"-"+calendar.get(Calendar.YEAR);
+            Reportes.newReporte(date);
+        });
+        
         btAddProduct.setOnAction((e)->{
             if(c.getCode(txtCode.getText())){
                 

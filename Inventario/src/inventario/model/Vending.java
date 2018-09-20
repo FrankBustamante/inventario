@@ -6,6 +6,7 @@ import inventario.utilities.PVent;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import javafx.collections.ObservableList;
 
 /**
  *
@@ -13,12 +14,16 @@ import java.util.Date;
  */
 public class Vending implements Serializable{
     private String codeFact;
-    private ArrayList<PVent> products;
+    private PVent[] products;
     private static final  String DATA_V = new Date().toLocaleString();
     private String total;
 
-    public Vending(ArrayList<PVent> products,String  total) {
-        this.products = products;
+    public Vending(ObservableList<PVent> p,String  total) {
+        this.products = new PVent[p.size()];
+        for (int i = 0; i < p.size(); i++) {
+            products[i] = p.get(i);
+        }
+        
         this.codeFact = "";
         this.total = total;
     }
@@ -40,12 +45,13 @@ public class Vending implements Serializable{
         this.codeFact = codeFact;
     }
 
-    public ArrayList<PVent> getProducts() {
+    public PVent[] getProducts() {
+        
         return products;
     }
 
-    public void setProducts(ArrayList<PVent> products) {
-        this.products = products;
+    public void setProducts(ObservableList<PVent> products) {
+        
     }
 
     public static String getDATA_V() {

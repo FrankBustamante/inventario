@@ -13,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -30,6 +31,7 @@ public class Login extends Pane {
     private Label lUser;
     private Label lPasword;
     private Button btIngresar;
+    private ToggleButton bt;
     
     public Login() {
         
@@ -47,12 +49,13 @@ public class Login extends Pane {
     	lUser = new Label("Usuario");
     	lPasword = new Label("Contraseña");
     	btIngresar = new Button("Ingresar");
+        bt = new ToggleButton("es togle");
         
         //configurar elementos
         this.setPrefSize(400, 200);
         
         //agregar elementos
-        this.getChildren().addAll(new VBox(lUser,txtUser,lPasword,txtPassword,btIngresar));
+        this.getChildren().addAll(new VBox(lUser,txtUser,lPasword,txtPassword,btIngresar,bt));
         
         //eventos
         getEvents();
@@ -60,12 +63,16 @@ public class Login extends Pane {
     
     private void getEvents(){
         btIngresar.setOnMouseClicked((MouseEvent e) -> {
-            //new Inventario().getScene().setRoot(new ViewAdmin());
+            
             new Inventario().getScene().setRoot(new ViewMain());
            if(auth.logIn(txtUser.getText(),txtPassword.getText())){
               //new Inventario().getScene().setRoot(new ViewMain());
               //new Inventario().getScene().setRoot(new ViewAdmin());
            }
+        });
+        
+        bt.setOnAction((e) ->{
+            new Inventario().getScene().setRoot(new ViewAdmin());
         });
     }
 }
