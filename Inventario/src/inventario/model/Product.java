@@ -26,7 +26,6 @@ public class Product implements Serializable{
         this.code = String.valueOf(code);
         this.name = name;
         this.price = String.valueOf(price);
-        
     }
 
     public Product(String code, String am) {

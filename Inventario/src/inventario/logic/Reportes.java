@@ -20,7 +20,6 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  * @author Frank Bustamante
  */
 public class Reportes {
-    private Date date = new Date();
     private static final String enviro = "nombre de la hoja";
     private static final String FILE_PATH =  "src/inventario/persistence/local/reporte ";
     
@@ -30,11 +29,28 @@ public class Reportes {
         Workbook b = new XSSFWorkbook();
         Sheet s = b.createSheet(enviro);
         Row row = s.createRow(0);
-        
-        for (int i = 0; i < vendings.size(); i++) {
-            for (int j = 0; j < vendings.get(i).getProducts().length; j++) {
-                
+        row.createCell((0)).setCellValue("Cod. Venta/Producto");
+        row.createCell((1)).setCellValue("Nombre");
+        row.createCell((2)).setCellValue("Precio");
+        row.createCell((3)).setCellValue("Cantidad");
+        int index = 1;
+       
+        for(int j = 0; j < vendings.size(); j++){
+            Row row1;
+            Vending v = vendings.get(j);
+            s.createRow(index).createCell(0).setCellValue(v.getCodeFact());
+            for (int i = 0; i < v.getProducts().length; i++) {
+                row1 = s.createRow((index));
+                row1.createCell((1)).setCellValue(v.getProducts()[i].getName());
+                row1.createCell((2)).setCellValue(v.getProducts()[i].getPrice());
+                row1.createCell((3)).setCellValue(v.getProducts()[i].getAm());
+                index ++;
             }
+            
+            row1 = s.createRow((index));
+            row1.createCell(2).setCellValue("TOTAL");
+            row1.createCell(3).setCellValue(v.getTotal());
+            index ++;
         }
        
         

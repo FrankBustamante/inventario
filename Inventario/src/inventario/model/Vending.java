@@ -35,8 +35,7 @@ public class Vending implements Serializable{
     public void setTotal(String total) {
         this.total = total;
     }
-    
-    
+     
     public String getCodeFact() {
         return codeFact;
     }

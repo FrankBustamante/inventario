@@ -1,0 +1,54 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 24-sep-2018, 6:37:17
+    Author     : Frank Bustamante
+*/
+
+#root{
+    -fx-background-color: white;
+    -fx-pref-height: 600;
+    -fx-pref-width: 600;
+}
+
+#paneMain{
+    -fx-background-color:wheat;
+    -fx-translate-x: 0;
+    -fx-translate-Y: 25;
+    -fx-padding:5;
+    -fx-pref-height: 600;
+    -fx-pref-width: 600;
+}
+
+#txtAm, textf{
+    -fx-min-width: 148.5;
+    -fx-translate-y: 73;
+    -fx-translate-x: 14;
+    -fx-min-height:25;
+}
+
+#txtAm{
+    -fx-translate-x: 195;
+}
+
+#txtTotal{
+    -fx-min-width: 790;
+    -fx-translate-y: 34;
+}
+
+TableView{
+    -fx-translate-y: 160;    
+}
+
+
+Button{
+  -fx-translate-x: 396;
+  -fx-translate-y: 73;
+}
+
+#btSave{
+    -fx-translate-x: 527;
+}

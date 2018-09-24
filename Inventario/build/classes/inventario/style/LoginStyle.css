@@ -1,0 +1,41 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 23-sep-2018, 22:35:10
+    Author     : Frank Bustamante
+*/
+
+#root{
+    -fx-background-image: url("file:src/inventario/view/fondolog.jpg") ;
+    -fx-background-repeat: space;   
+    -fx-background-size: 960 686;
+    -fx-background-position: center center;   
+}
+
+#paneMain{
+    -fx-background-color: rgba(0, 0, 0, 0.8);
+    -fx-background-size: 1000 806;
+}
+
+#paneButtons{
+    -fx-background-color: #f36;
+    -fx-translate-x: 220;
+    -fx-translate-Y: 340;
+    -fx-alignment: CENTER;
+}
+
+#button, #br{
+    -fx-text-fill: white;
+    -fx-background-color: transparent;
+    -fx-font-size: 18px;
+    -fx-font-style: normal;
+    -fx-font-weight: 700;
+}
+
+#br{
+    -fx-font-size: 40px;
+}
+

@@ -11,8 +11,10 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.ObservableList;
 
 /**
  *
@@ -25,7 +27,6 @@ public class Products {
      private static final String FILE_PAHT = "src/inventario/persistence/local/products.dat";
     
     public static ArrayList<Product> getProducts(){
-        System.out.println("obteniendo...");
         try {
             File file = new File(FILE_PAHT);
             
@@ -35,9 +36,7 @@ public class Products {
                 Object product = get.readObject();
                 
                 while (product != null) {
-                    System.out.println("leido");
                     if (product instanceof Product) {
-                        System.out.println("obtenido "+((Product) product).getQuantity());
                         Products.products.add((Product) product);
                     }
                     product = get.readObject();
@@ -63,11 +62,11 @@ public class Products {
     
     public static Product getProduct(String code){
          getProducts();
-        for (int i = 0; i < products.size(); i++) {
-            if(products.get(i).getCode().equals(code)){
-                return products.get(i);
-            }
-        }
+         for(Product p : products) {
+             if(p.getCode().equals(code)){
+                 return p;
+             }
+         }
         
         return null;
     }
@@ -100,10 +99,36 @@ public class Products {
         return state;
     }
     
-    public static boolean updateProduct(Product p){
-        boolean state = false;
+    public static boolean updateProduct(ObservableList<Product> products){
+        try {
+            File file = new File(FILE_PAHT);
+            
+            if(file.exists()){
+                ObjectOutputStream save = new ObjectOutputStream(new FileOutputStream(file));
+                
+                products.forEach(p ->{
+                    try {
+                        save.writeObject(p);
+                    } catch (IOException ex) {
+                        Logger.getLogger(Products.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                });
+                
+                save.close();
+                return true;
+            }else{
+                
+            }
+            
+         } catch (FileNotFoundException ex) {
+             System.out.println("error: "+ex);
+             Logger.getLogger(Products.class.getName()).log(Level.SEVERE, null, ex);
+         }catch(IOException ioEx){
+             System.out.println("Error: "+ioEx);
+         }
         
-        return state;
+        
+        return false;
     }
     
     public static boolean deleteProduct(Product p){
