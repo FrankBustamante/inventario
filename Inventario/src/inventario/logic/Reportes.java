@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -23,9 +25,14 @@ public class Reportes {
     private static final String enviro = "nombre de la hoja";
     private static final String FILE_PATH =  "src/inventario/persistence/local/reporte ";
     
-    public static boolean newReporte(String date){
+    public static boolean newReporte(String date, Stage stage) throws InterruptedException{
         
         ArrayList<Vending> vendings = Vendings.getVendings(date);
+        
+        if(vendings.size() < 1 ){
+            return false;
+        }
+        
         Workbook b = new XSSFWorkbook();
         Sheet s = b.createSheet(enviro);
         Row row = s.createRow(0);
@@ -52,12 +59,16 @@ public class Reportes {
             row1.createCell(3).setCellValue(v.getTotal());
             index ++;
         }
+        
        
         
         try {
+            FileChooser fc = new FileChooser();
+            fc.showSaveDialog(stage);
             try (FileOutputStream f = new FileOutputStream(FILE_PATH+date+".xlsx")) {
                 b.write(f);
                 f.close();
+                return true;
             }
         } 
         catch (FileNotFoundException ex) {

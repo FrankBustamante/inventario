@@ -8,3 +8,31 @@ and open the template in the editor.
     Author     : Frank Bustamante
 */
 
+Button{
+    -fx-translate-y:20;
+    -fx-text-fill: white;
+    -fx-font-size: 13px;
+    -fx-font-style: normal;
+    -fx-font-family: Segoe UI Semibold;
+    -fx-background-radius: 20;
+    -fx-border-color: #f36;
+    -fx-border-radius: 20;
+    -fx-background-color: transparent;
+    -fx-min-width:150;
+    -fx-min-height:35;
+}
+
+Button:hover{
+    -fx-background-color:#f36;
+    -fx-text-fill:white;
+}
+
+TextField{
+    -fx-font-size:18;
+    -fx-min-height:1;
+    -fx-max-height:33;
+    -fx-alignment:CENTER;
+    -fx-border-radius:20 20 0 0;
+    -fx-background-radius:20 20 2 2;
+    -fx-font-weight: 800;
+}

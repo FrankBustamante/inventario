@@ -50,24 +50,23 @@ public class Products {
         catch (ClassNotFoundException ex) {
              Logger.getLogger(Products.class.getName()).log(Level.SEVERE, null, ex);
              System.out.println("eror: "+ex);
-         }catch(EOFException f){
+        }catch(EOFException f){
              System.out.println("fin del fichero");
-         }
+        }
         catch(Exception er){
              System.out.println("error: "+er);
-         }
+        }
         
         return Products.products;        
     }
     
     public static Product getProduct(String code){
-         getProducts();
+        getProducts();
          for(Product p : products) {
              if(p.getCode().equals(code)){
                  return p;
              }
-         }
-        
+        }
         return null;
     }
     

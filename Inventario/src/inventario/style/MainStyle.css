@@ -7,48 +7,42 @@ and open the template in the editor.
     Created on : 24-sep-2018, 6:37:17
     Author     : Frank Bustamante
 */
-
+/*
 #root{
     -fx-background-color: white;
     -fx-pref-height: 600;
     -fx-pref-width: 600;
 }
+*/
+/*
+#paneTop{
+    -fx-alignment: CENTER;
+}*/
 
-#paneMain{
-    -fx-background-color:wheat;
-    -fx-translate-x: 0;
-    -fx-translate-Y: 25;
-    -fx-padding:5;
-    -fx-pref-height: 600;
-    -fx-pref-width: 600;
+Button{
+    -fx-translate-y:20;
+    -fx-text-fill: #f36;
+    -fx-font-size: 13px;
+    -fx-font-style: normal;
+    -fx-font-family: Segoe UI Semibold;
+    -fx-background-radius: 20;
+    -fx-border-color: #f36;
+    -fx-border-radius: 20;
+    -fx-background-color: transparent;
+    -fx-min-width:150;
+    -fx-min-height:35;
 }
 
-#txtAm, textf{
-    -fx-min-width: 148.5;
-    -fx-translate-y: 73;
-    -fx-translate-x: 14;
-    -fx-min-height:25;
+Button:hover{
+    -fx-background-color:#f36;
+    -fx-text-fill:white;
 }
 
-#txtAm{
-    -fx-translate-x: 195;
-}
 
-#txtTotal{
-    -fx-min-width: 790;
-    -fx-translate-y: 34;
-}
 
 TableView{
     -fx-translate-y: 160;    
 }
 
 
-Button{
-  -fx-translate-x: 396;
-  -fx-translate-y: 73;
-}
 
-#btSave{
-    -fx-translate-x: 527;
-}

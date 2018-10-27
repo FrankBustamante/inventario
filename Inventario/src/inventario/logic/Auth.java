@@ -5,12 +5,15 @@
  */
 package inventario.logic;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Frank Bustamante
  */
 public class Auth {
     private static boolean isAuth = false;
+    private String user, pass;
     
     public boolean isAuth(){
         return isAuth;
@@ -22,5 +25,10 @@ public class Auth {
         }
      
         return false;
+    }
+    
+    private class us implements Serializable{
+        private String user;
+        private String pass;
     }
 }
